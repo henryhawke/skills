@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile Development"
+  short_description: "React Native, Flutter, iOS, and cross-platform"
+  default_prompt: "Build or improve mobile app features with modern architecture patterns and cross-platform best practices."

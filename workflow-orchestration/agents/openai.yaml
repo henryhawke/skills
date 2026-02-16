@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Orchestration"
+  short_description: "Temporal workflows and distributed orchestration"
+  default_prompt: "Design durable workflows with Temporal for distributed systems, covering workflow patterns, testing, and deployment."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Auditing"
+  short_description: "DevSecOps, vulnerability assessment, and compliance"
+  default_prompt: "Perform a security audit covering vulnerabilities, threat modeling, compliance, and DevSecOps practices."

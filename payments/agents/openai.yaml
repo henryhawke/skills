@@ -1,0 +1,4 @@
+interface:
+  display_name: "Payment Processing"
+  short_description: "Stripe, PayPal, billing, and PCI compliance"
+  default_prompt: "Implement secure payment processing with Stripe/PayPal, subscription management, and PCI compliance."

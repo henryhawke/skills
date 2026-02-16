@@ -1,0 +1,4 @@
+interface:
+  display_name: "Content Marketing & SEO"
+  short_description: "SEO optimization, content strategy, and marketing"
+  default_prompt: "Optimize content for SEO with keyword strategies, meta optimization, and content marketing best practices."

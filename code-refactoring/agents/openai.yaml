@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Refactoring"
+  short_description: "Refactor and modernize codebases"
+  default_prompt: "Analyze this code and suggest refactoring improvements for better maintainability and performance."

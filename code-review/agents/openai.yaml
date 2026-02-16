@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Review"
+  short_description: "AI-powered code review and architecture analysis"
+  default_prompt: "Review this code for quality, security vulnerabilities, performance issues, and architectural integrity."

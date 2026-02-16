@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance & Observability"
+  short_description: "Monitoring, tracing, metrics, and optimization"
+  default_prompt: "Set up comprehensive observability with monitoring, logging, tracing, and performance optimization."

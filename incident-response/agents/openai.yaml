@@ -1,0 +1,4 @@
+interface:
+  display_name: "Incident Response & SRE"
+  short_description: "Incident management, troubleshooting, and reliability"
+  default_prompt: "Help with incident response, troubleshooting production issues, and implementing SRE practices."

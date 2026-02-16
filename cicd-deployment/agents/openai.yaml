@@ -1,0 +1,4 @@
+interface:
+  display_name: "CI/CD & Deployment"
+  short_description: "Pipelines, GitOps, and deployment automation"
+  default_prompt: "Design and implement CI/CD pipelines with GitOps workflows and deployment automation."

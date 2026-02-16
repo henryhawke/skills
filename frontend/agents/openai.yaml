@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Development"
+  short_description: "React, Next.js, and modern frontend"
+  default_prompt: "Build or improve frontend components with React, Next.js, and modern frontend best practices."

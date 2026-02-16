@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloud Infrastructure"
+  short_description: "AWS/Azure/GCP, Terraform, Kubernetes, networking"
+  default_prompt: "Design and implement cloud infrastructure with IaC, container orchestration, and networking best practices."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Architecture & Optimization"
+  short_description: "Schema design, query optimization, and administration"
+  default_prompt: "Design optimal database schema, optimize queries, and implement best practices for the data layer."

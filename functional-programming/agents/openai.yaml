@@ -1,0 +1,4 @@
+interface:
+  display_name: "Functional Programming"
+  short_description: "Haskell, Elixir, and FP patterns"
+  default_prompt: "Write idiomatic functional code with advanced type systems, concurrency, and fault-tolerant patterns."

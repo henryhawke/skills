@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Management"
+  short_description: "Task orchestration and execution"
+  default_prompt: "Analyze the task queue, identify parallelizable work, and coordinate task execution efficiently."

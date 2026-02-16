@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developer Experience"
+  short_description: "Monorepos, tooling, DX optimization"
+  default_prompt: "Improve developer experience with better tooling, monorepo management, and workflow optimization."

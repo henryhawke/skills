@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI & LLM Development"
+  short_description: "LLM apps, RAG, prompt engineering, and AI agents"
+  default_prompt: "Build production-ready LLM applications with RAG, prompt engineering, and intelligent agent patterns."

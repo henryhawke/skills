@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Architecture"
+  short_description: "APIs, microservices, and distributed systems"
+  default_prompt: "Design or implement backend services with scalable API design, microservices patterns, and production-ready architecture."

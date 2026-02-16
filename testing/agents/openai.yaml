@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Automation"
+  short_description: "AI-powered test automation and TDD"
+  default_prompt: "Analyze the codebase and create comprehensive tests with modern frameworks and best practices."

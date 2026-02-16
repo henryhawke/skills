@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility & WCAG"
+  short_description: "WCAG audits, screen reader testing, and a11y"
+  default_prompt: "Audit for WCAG 2.2 compliance, test screen reader compatibility, and fix accessibility issues."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Engineering"
+  short_description: "Pipelines, Spark, dbt, Airflow, and data quality"
+  default_prompt: "Design and build scalable data pipelines with modern data stack tools and best practices."

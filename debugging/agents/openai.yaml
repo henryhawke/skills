@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debugging & Error Analysis"
+  short_description: "Debug errors, analyze logs, find root causes"
+  default_prompt: "Investigate this error, analyze logs and stack traces, and identify the root cause with a fix."

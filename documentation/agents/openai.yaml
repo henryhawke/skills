@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Documentation"
+  short_description: "API docs, tutorials, architecture docs, and diagrams"
+  default_prompt: "Generate comprehensive technical documentation for this codebase including API docs, architecture guides, and diagrams."

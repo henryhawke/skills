@@ -1,0 +1,4 @@
+interface:
+  display_name: "Systems Programming"
+  short_description: "Go, Rust, C++, and C development"
+  default_prompt: "Write efficient systems-level code with proper memory management, concurrency, and performance optimization."

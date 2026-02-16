@@ -1,0 +1,4 @@
+interface:
+  display_name: "JavaScript & TypeScript"
+  short_description: "Modern JS/TS patterns and Node.js"
+  default_prompt: "Write or improve JavaScript/TypeScript code with modern patterns, type safety, and Node.js best practices."
