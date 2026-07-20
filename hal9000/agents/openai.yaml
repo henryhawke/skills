@@ -1,0 +1,4 @@
+interface:
+  display_name: "HAL 9000"
+  short_description: "Autonomously prioritize and orchestrate repo work"
+  default_prompt: "Use $hal9000 to continuously find, prioritize, delegate, and verify the most valuable safe work in this repository."

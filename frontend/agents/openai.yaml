@@ -1,4 +1,4 @@
 interface:
-  display_name: "Frontend Development"
-  short_description: "React, Next.js, and modern frontend"
-  default_prompt: "Build or improve frontend components with React, Next.js, and modern frontend best practices."
+  display_name: "Frontend Engineering"
+  short_description: "React, Next.js, UI systems, and visual QA"
+  default_prompt: "Use $frontend to build or refine a web UI while preserving the existing design system, responsiveness, accessibility, and state handling."

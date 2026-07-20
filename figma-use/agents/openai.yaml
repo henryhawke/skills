@@ -1,9 +1,9 @@
 interface:
-  display_name: "Figma Implement Design"
-  short_description: "Turn Figma designs into production-ready code"
+  display_name: "use_figma"
+  short_description: "Load the required rules before calling use_figma"
   icon_small: "./assets/figma-small.svg"
   icon_large: "./assets/figma.png"
-  default_prompt: "Use $figma-implement-design to implement this Figma design in this codebase, matching layout, states, and responsive behavior."
+  default_prompt: "Use $figma-use and follow its rules before making any use_figma call."
 
 dependencies:
   tools:
