@@ -80,16 +80,16 @@ if ! git diff --cached --quiet; then
   git commit -m "chore: sync local skills $sync_timestamp"
 fi
 
-if ! git rebase origin/main; then
-  git rebase --abort
+if ! git merge --no-edit origin/main; then
+  git merge --abort
   fail "remote changes conflict with local commits; both histories were preserved"
 fi
 
 if ! git push origin main; then
   log "push raced with a remote update; retrying once"
   git fetch --prune origin
-  if ! git rebase origin/main; then
-    git rebase --abort
+  if ! git merge --no-edit origin/main; then
+    git merge --abort
     fail "remote changes conflict after the push retry; both histories were preserved"
   fi
   git push origin main || fail "push failed after one safe retry"
