@@ -1,0 +1,4 @@
+interface:
+  display_name: "Toxic Candy Arcade UI"
+  short_description: "Design polished FWF toxic-candy mobile UI"
+  default_prompt: "Use $design-fwf-toxic-candy-ui to design or refine a Fart With Friends screen."

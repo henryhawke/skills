@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement FWF UI"
+  short_description: "Ship FWF Flutter screens and interactions"
+  default_prompt: "Use $implement-fwf-ui to implement this Fart With Friends UI change safely."

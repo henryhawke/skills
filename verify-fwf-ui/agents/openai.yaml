@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify FWF UI"
+  short_description: "Validate FWF UI contracts and accessibility"
+  default_prompt: "Use $verify-fwf-ui to validate this Fart With Friends interaction."
