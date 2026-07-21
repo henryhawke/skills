@@ -1,0 +1,4 @@
+interface:
+  display_name: "Opium"
+  short_description: "Deep evidence-backed codebase completion audit"
+  default_prompt: "Use $opium to determine what this codebase has completed, audit the latest ten checks, and produce the exact evidence-backed remaining-work critical path."
