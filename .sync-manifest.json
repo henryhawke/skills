@@ -2,61 +2,61 @@
   "version": 1,
   "skills": {
     "babysit": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "canvas": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "create-hook": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "create-rule": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "create-skill": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "create-subagent": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "sdk": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "loop": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "migrate-to-skills": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "shell": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "split-to-prs": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "statusline": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "update-cli-config": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "update-cursor-settings": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "automate": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "review": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "review-bugbot": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "review-security": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     "onboard": {
-      "lastSyncedAt": 1784732219160
+      "lastSyncedAt": 1784734019593
     },
     ".system": {
       "lastSyncedAt": 1784554181006
@@ -1176,6 +1176,9 @@
     },
     "obsidian-second-brain": {
       "lastSyncedAt": 1784649333186
+    },
+    "streamline": {
+      "lastSyncedAt": 1784734019593
     }
   },
   "lastInventoryAt": 1784730418735

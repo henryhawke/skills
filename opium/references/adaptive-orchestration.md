@@ -106,16 +106,22 @@ Build assignments from uncovered proof cells, then pack adjacent cells by runtim
 
 Prefer one fresh subagent per logical assignment to reduce context correlation. Reuse an agent only for a tightly scoped follow-up on its existing evidence. Respect the runtime concurrency limit by dispatching sequential waves; logical assignment count is not simultaneous agent count.
 
-Target 18–24 assignments for medium/large repositories through adaptive waves:
+Size the portfolio by unique proof obligations, not repository prestige or a fixed agent quota:
+
+- small/narrow: 3–6 logical assignments;
+- medium: 8–14 logical assignments;
+- large, multi-service, or high-risk: 14–24 logical assignments.
+
+Start at the low end and expand only while high-EVI uncovered cells remain. Within the selected portfolio, use these approximate allocations:
 
 - **35–50% primary mapping:** contracts, runtime boundaries, data domains, tests, and check history.
 - **20–30% cross-layer closure:** call paths, lifecycle, security/privacy, generated/config/deploy agreement.
 - **20–25% adversarial falsification:** done skeptic, gap skeptic, temporal skeptic, test skeptic, negative-space miner.
 - **10–15% independent verification:** critical/high adjudication and sampled medium/low completion claims.
 
-The percentages are guidance, not a quota. Reallocate toward uncertainty hotspots. Never duplicate a shard because an earlier agent was merely concise; ask a focused follow-up instead.
+The ranges and percentages are guidance, not completion criteria. Reallocate toward uncertainty hotspots. Never duplicate a shard because an earlier agent was merely concise; ask a focused follow-up instead.
 
-Use Spark for broad, fast, bounded evidence work when advertised. If unavailable, prefer `gpt-5.6-luna` with medium reasoning when advertised. Use the fallback for the same shard definitions; do not silently reduce proof requirements because the model changed.
+Follow user and repository model policy. Inherit the parent model by default; use only currently advertised overrides, and reserve stronger permitted reasoning for high-risk adjudication or adversarial verification. Record the actual model/effort and any substitution. Never weaken the shard definition or proof requirements because the model changed.
 
 ## 5. Independence and adversarial quorum
 

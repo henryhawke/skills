@@ -31,6 +31,8 @@ For `DEGRADED` audits, insert a banner immediately after the lead: `Bounded audi
 
 Use concise tables where repeated fields make comparison easier. Keep evidence next to the claim it supports. Use clickable absolute local-file links when the client supports them.
 
+Do not omit a required section because its evidence universe is empty; state “none proven” or the exact unavailable-evidence boundary. Keep `UNKNOWN`/`BLOCKED_UNVERIFIED` distinct from `MISSING`: inaccessible proof is not proof that implementation is absent.
+
 ## 2. Verdict table
 
 Use one row per finish-line dimension:
@@ -112,8 +114,10 @@ End the audit itself with:
 - specific reasons confidence is not higher;
 - exact uninspected or inaccessible universes;
 - tool/index/parser truncation and pagination status;
-- whether Spark was available, whether the preferred `gpt-5.6-luna` medium fallback was used, any further runtime substitution, and how many logical agent assignments completed;
+- actual model/reasoning assignments, any runtime substitution or governing model restriction that affected coverage, and how many logical agent assignments completed;
 - whether the worktree changed during the audit;
 - the one next action most likely to change the verdict.
 
 Avoid “near-perfect,” “fully complete,” “all good,” or “nothing else” unless the skill's strict stop condition is met. Prefer: “High confidence for current source closure; low confidence for release readiness because target and device evidence are absent.”
+
+Before sending, verify each verdict row and remaining-work packet against its cited evidence. Every evidence note must say both what it proves and, where easily confused, what stronger evidence class it does not prove.

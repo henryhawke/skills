@@ -1,171 +1,551 @@
-# UX streamlining research brief
+# UX streamlining evidence and standards playbook
 
-Research date: 2026-07-22  
-Purpose: evidence base for the canonical Codex skill `/streamline`
+Use this reference to justify decisions, resolve conflicting heuristics, select a validation method, and keep the skill aligned with current authoritative guidance. It is an operating reference, not evidence that any specific product or user population behaves a certain way.
 
-## Executive conclusion
+**Source set reviewed through:** 2026-07-22
 
-`/streamline` should optimize **successful, confident task completion with the least total human effort**, not chase the fewest screens or clicks. ISO treats usability as an outcome of use in a specified context; the core dimensions are effectiveness, efficiency, and satisfaction, not UI compactness in isolation ([ISO 9241-11:2018](https://www.iso.org/standard/63500.html)). Nielsen Norman Group likewise defines interaction cost as the combined mental and physical effort of reading, locating, understanding, clicking, typing, waiting, switching attention, and remembering ([interaction cost](https://www.nngroup.com/articles/interaction-cost-definition/)).
+## Contents
 
-This distinction is decisive. Original UIE/Center Centre clickstream research found that successful and unsuccessful paths had the same click-count distribution, so click count did not predict success ([Testing the Three-Click Rule](https://articles.centercentre.com/three_click_rule/)). Baymard's first-party checkout studies similarly find that the number of fields and perceived effort matter more than the number of steps ([checkout-flow research](https://baymard.com/blog/checkout-flow-average-form-fields)). A clear five-step flow can be easier and safer than a crowded two-step flow.
+- [How to use evidence](#how-to-use-evidence)
+- [Decision authority](#decision-authority)
+- [Standing operating rules](#standing-operating-rules)
+- [Context-dependent choices](#context-dependent-choices)
+- [Measurement and method map](#measurement-and-method-map)
+- [Accessibility requirements map](#accessibility-requirements-map)
+- [AI and automation requirements map](#ai-and-automation-requirements-map)
+- [Reliability and release requirements map](#reliability-and-release-requirements-map)
+- [Source index](#source-index)
+- [Maintenance rules](#maintenance-rules)
 
-The skill should produce two things together:
+# How to use evidence
 
-1. an evidence-backed redesign that removes redundant work and makes the next useful action obvious; and
-2. a before/after measurement contract that can disprove the redesign.
+## Match evidence to the question
 
-Synthetic workflow stories are useful **design probes**, not user research. They should make hidden complexity vivid, enumerate hypotheses, and generate test tasks. They must never be presented as evidence about what real users do; GOV.UK explicitly requires continuous research with real users and their end-to-end journeys ([user-research guidance](https://www.gov.uk/service-manual/user-research/how-user-research-improves-service-design)).
+| Question | Strongest useful evidence | Supporting evidence | Do not substitute |
+|---|---|---|---|
+| What actually happens in this product? | Production instrumentation, direct observation, runtime/repository trace | Support cases and stakeholder reports | External heuristics |
+| Why does it happen? | Task observation, contextual inquiry, interviews paired with behavior | Cognitive walkthrough and support evidence | Event sequence alone |
+| How often and for whom? | Defined production denominator and segments | Repeated support/research samples | One anecdote or synthetic persona |
+| Is the experience accessible? | Applicable standard plus keyboard/representative AT task testing | Automated checks and platform guidance | Visual inspection alone |
+| Is the change safe or allowed? | Law/policy/domain/security/privacy owner and authoritative system contract | Failure analysis and standards | UX preference or opportunity score |
+| Which pattern is a strong starting point? | Direct user evidence and established design system | External research and platform guidance | Trend or personal taste |
+| Did the candidate cause improvement? | Controlled experiment or defensible matched comparison | Repeated benchmark task evidence | Before/after screenshots or click counts |
+| Is workload lower? | Task outcomes plus appropriate workload measure | Effort-vector counts | Click count as cognitive load |
+| Is an AI/automation level appropriate? | Task risk, authority, quality evaluation, exception data, and human-control testing | Human-AI guidelines and risk frameworks | Model capability demo or acceptance rate |
+| Is a production rollout safe? | Compatibility tests, staged release, monitoring, rollback/compensation | SRE and resilience guidance | Local happy-path pass |
 
-## Evidence-derived operating principles
+## Evidence-label rule
 
-### 1. Start with the whole job, not the current screen
+Use the labels defined in [workflow-lab.md](workflow-lab.md#evidence-rules).
 
-Map the user's trigger, desired outcome, starting information, handoffs, interruptions, offline steps, and confirmation of completion. Do not preserve a cumbersome screen merely because it reflects an organizational or database structure. GOV.UK recommends working end-to-end, front-to-back, and across channels, while avoiding exposure of internal structures to users ([good-service characteristics](https://www.gov.uk/service-manual/design/introduction-designing-government-services)).
+External sources support general statements such as:
 
-The streamlining unit is a **task episode**: intent to verified outcome, including recovery. Local savings that create extra work elsewhere are regressions.
+> Preserving previously entered information reduces redundant entry.
 
-### 2. Minimize total interaction cost, not raw clicks
+They do not support local claims such as:
 
-For every step, inventory:
+> Users abandon this form because the address is repeated.
 
-- decisions and concepts the user must understand;
-- text to scan, fields to inspect, data to type, and facts to remember;
-- pointer/keyboard actions, scrolling, backtracking, and window/context switches;
-- waiting, uncertain system state, help seeking, errors, and rework;
-- consequences, reversibility, and confidence checks.
+The latter requires product evidence and must otherwise be labeled a hypothesis.
 
-Clicks are one diagnostic component. A click that narrows choices with strong information scent may reduce effort; a single click that exposes a wall of options may increase it. Prefer fewer **meaningless decisions, redundant entries, ambiguous paths, and attention switches** over fewer screens at any cost.
+## Claim-strength rule
 
-### 3. Make functions findable in the user's language
-
-Navigation labels, action names, settings locations, and grouping should match user concepts and expected task order. NN/g's information-scent model says a user's next choice depends on the label, surrounding context, and prior experience; vague labels such as “More” disclose little about the destination ([information scent](https://www.nngroup.com/articles/information-scent/)). Place task-specific controls near the task rather than in a distant global settings maze; Apple likewise recommends minimizing settings and deriving what the system already knows ([Apple HIG: Settings](https://developer.apple.com/design/human-interface-guidelines/settings)).
-
-Diagnose the right layer before redesigning. Tree testing isolates information architecture; card sorting examines grouping and labels; click testing examines visual prominence; usability testing observes the combined experience. Direct success, indirect success/backtracking, first choice, and time are useful IA measures ([findability testing methods](https://www.nngroup.com/articles/navigation-ia-tests/)). Do not solve a taxonomy problem by merely enlarging a button, or solve a visibility problem by rebuilding the taxonomy.
-
-### 4. Externalize memory; disclose complexity progressively
-
-Keep needed labels, prior choices, current state, requirements, and consequences visible or immediately retrievable. Recognition generally requires less memory work than recall ([recognition versus recall](https://www.nngroup.com/articles/recognition-and-recall/)). Preserve inputs across navigation and errors, show meaningful recent items, and put contextual help beside the decision it supports.
-
-Progressive disclosure is appropriate when advanced or infrequent options would otherwise compete with common work. The primary surface must contain frequently needed actions, and the reveal control must clearly predict what it contains. Usage analytics can suggest the split, but observational testing must validate it; more than two disclosure levels often harms orientation ([progressive disclosure](https://www.nngroup.com/articles/progressive-disclosure/)). Do not bury rare-but-critical safety, permission, recovery, or compliance controls merely because they are infrequent.
-
-### 5. Use defaults carefully, and prefer direct action when it remains safe
-
-Good defaults can remove configuration work, but defaults are not neutral. GOV.UK advises against preselecting answers to questions because users may miss the question or submit the wrong answer; a settings control may have a default when it represents an intentional product configuration rather than a claimed fact or consent ([radios](https://design-system.service.gov.uk/components/radios/), [selects](https://design-system.service.gov.uk/components/select/)). Defaults should be visible, easy to change, based on strong evidence, and safe for the common case.
-
-When appropriate, let users act on visible objects with rapid, incremental, reversible operations and immediate visible results. Those are the defining properties of direct manipulation in Shneiderman's original work ([1983 paper](https://www.cs.umd.edu/users/ben/papers/Shneiderman1983Direct.pdf)). Use inline editing, drag/drop with an equivalent non-drag route, immediate filtering, and undo where they reduce indirection. Keep explicit review for consequential or ambiguous changes.
-
-### 6. Design public forms and expert admin tools for their different contexts
-
-For forms, ask only what is necessary, reuse already supplied information, infer safely, preserve data after validation, and reveal conditional questions only when relevant. WCAG 2.2 requires previously entered information in the same process to be auto-populated or selectable unless an exception applies ([SC 3.3.7 Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html)). Baymard's research reinforces that visible fields and fields users must consider drive perceived effort more than nominal step count.
-
-“One thing per page” is a strong starting point for unfamiliar public flows because it improves focus, mobile use, analytics, and error recovery, but it is not universal ([GOV.UK form structure](https://www.gov.uk/service-manual/design/form-structure)). Repetitive admin work may need compact comparison, fast switching, bulk actions, saved views, and keyboard accelerators. GOV.UK explicitly notes that internal users who repeat and switch tasks may need to see more information at once; internal systems still require the same accessibility and user-needs standard ([services for government users](https://www.gov.uk/service-manual/design/services-for-government-users)). Test novices and high-frequency experts separately.
-
-### 7. Prevent expensive errors; make recovery local and humane
-
-Prioritize error prevention by consequence, not annoyance. Use constraints, clear units and formats, review-before-commit for high-impact operations, double-submit protection, undo where truthful, and explicit destructive-action labels. Do not add confirmations to every harmless action; habituation and extra work can make indiscriminate confirmation counterproductive.
-
-When an error occurs, identify the affected item in text, preserve valid entries, explain the cause in plain language, suggest a correction, focus/scroll to a useful location, and keep the user in the task. WCAG requires textual error identification and, for legal/financial/data changes, reversibility, checking, or review/confirmation ([WCAG 2.2 input assistance](https://www.w3.org/TR/WCAG22/#input-assistance)). GOV.UK's check-answers pattern is specifically intended to reduce error rates before submission ([check answers](https://design-system.service.gov.uk/patterns/check-answers/)).
-
-### 8. Make every wait and state transition legible
-
-Feedback is part of streamlining: a user who cannot tell whether a click registered may click again, wait unnecessarily, or leave. For web products, measure field performance rather than relying only on lab speed. Google's current Core Web Vitals targets at the 75th percentile are LCP at or below 2.5 seconds, INP at or below 200 ms, and CLS at or below 0.1 ([Web Vitals](https://web.dev/articles/vitals)).
-
-Across platforms, give immediate acknowledgment, name the operation, distinguish queued/running/succeeded/failed, and expose a reliable completion state. For genuinely long work, show determinate progress or meaningful milestones and allow safe cancellation when possible. The classic 0.1/1/10-second thresholds are useful perceptual rules of thumb, not service-level guarantees: roughly immediate, flow-preserving, and attention-breaking respectively ([response-time limits](https://www.nngroup.com/articles/response-times-3-important-limits/)). Status messages must also be programmatically available without unnecessarily moving focus ([WCAG status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages)).
-
-### 9. Accessibility is a completion requirement, not polish
-
-Streamlining must work with keyboard, screen reader, zoom/reflow, touch, reduced motion, and constrained attention or motor control. WCAG 2.2 requires visible focus, consistent identification/navigation, keyboard operation, error support, and minimum pointer-target sizing of 24 by 24 CSS pixels subject to defined exceptions; 44 by 44 is the enhanced target ([WCAG 2.2](https://www.w3.org/TR/WCAG22/)). Dragging must have a single-pointer alternative when dragging is not essential. Automating or hiding controls is not an improvement if it removes an accessible route or makes state changes unannounced.
-
-### 10. Aesthetic refinement should strengthen hierarchy, not add decoration
-
-Minimalism means removing competition with the primary goal, not making controls faint, unlabeled, or unfamiliar. NN/g's heuristic says every irrelevant unit competes with relevant information ([ten usability heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/)). Apple's current HIG emphasizes hierarchy, harmony, and consistency with platform conventions ([Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines?lang=en)).
-
-Use typography, spacing, grouping, alignment, contrast, and one clear primary action to encode importance. Reuse the product's design system and platform patterns. A visually sparse screen with weak affordances is not streamlined; a dense expert dashboard with disciplined grouping may be. Because visual appeal can improve *perceived* usability even when behavior has not improved, measure perceived craft separately from task performance ([Tractinsky et al.](https://doi.org/10.1016/S0953-5438(00)00031-X)).
-
-## Universal guardrails versus context-dependent choices
-
-| Treat as a standing guardrail | Treat as a hypothesis to test in context |
+| Wording | Use when |
 |---|---|
-| Visible system status and completion state | One page versus a multi-step flow |
-| User language, consistent labels, and strong information scent | Which functions deserve first-level visibility |
-| Recognition over unnecessary recall | Progressive-disclosure split and number of visible controls |
-| Preserve work; prevent and recover from errors | Autosave, optimistic UI, and automatic application of changes |
-| Reversible exits and explicit consequential actions | Defaults, personalization, recommendations, and automation |
-| Keyboard/AT operation and WCAG-conformant semantics | Cards versus tables; modal versus inline editing |
-| A clear hierarchy and one dominant next action where one exists | Density, bulk actions, shortcuts, and saved views for experts |
-| Measure end-to-end outcomes with real users | Exact step, field, and click-count targets |
+| **Must / required** | Applicable law, policy, standard/conformance target, security/privacy rule, or explicit product contract requires it |
+| **Should / strong default** | Multiple strong sources support the principle and local risk does not conflict |
+| **Prefer / consider** | Pattern commonly reduces the diagnosed cost but context can reverse it |
+| **Hypothesis / predict** | Effect has not been measured locally |
+| **Unknown** | Evidence is absent, ambiguous, stale, or inaccessible |
 
-Safety, security, legal review, consent, permissions, audit trails, and necessary confirmation are not “fat.” Streamline their presentation and data reuse, but do not remove their control purpose.
+Do not turn a reputable company's design convention into a universal requirement.
 
-## Synthetic workflow method for `/streamline`
+# Decision authority
 
-Synthetic stories should create a precise mental simulation from repository/runtime evidence, then expose uncertainty. For each important workflow, generate at least these lenses:
+When sources conflict, resolve in this order:
 
-1. first-time or infrequent user;
-2. high-frequency expert/admin repeating the task at scale;
-3. interrupted user returning with partial work;
-4. keyboard/screen-reader or zoomed/mobile user;
-5. slow-network or degraded-response user;
-6. exception path: invalid data, permission denial, partial failure, stale state, or risky/destructive action.
+1. **Safety, law, consent, security, privacy, and binding product policy.**
+2. **Authoritative domain and source-of-truth constraints.**
+3. **Correct and accessible task completion in the real context of use.**
+4. **Direct product evidence: instrumented and observed behavior.**
+5. **Applicable standards and platform conventions.**
+6. **External research and mature design-system guidance.**
+7. **Heuristics and synthetic scenario predictions.**
+8. **Aesthetic preference.**
 
-Use this story contract:
+This is not a simple evidence-quality ranking. Each source answers a different question. Instrumentation can reveal scale but not motive; observation can reveal cause but not prevalence; standards define requirements but do not choose every layout.
+
+# Standing operating rules
+
+Treat these as defaults unless a higher authority or context-specific result overrides them.
+
+## 1. Optimize the complete outcome in context
+
+**Operational requirement**
+
+- Define actor, goal, context, start, verified end, errors, recovery, and re-entry.
+- Include cross-channel and human/system handoffs.
+- Measure effectiveness, efficiency, and confidence/satisfaction in the specified context.
+- Do not expose organizational or technical structure as the service model unless users actually think and work that way.
+
+**Primary references**
+
+- [ISO 9241-11:2018 — Usability: Definitions and concepts](https://www.iso.org/standard/63500.html)
+- [ISO 9241-210:2019 — Human-centred design for interactive systems](https://www.iso.org/standard/77520.html)
+- [ISO 9241-110:2020 — Interaction principles](https://www.iso.org/standard/75258.html)
+- [ISO 9241-115:2024 — Conceptual, interaction, interface, and navigation design](https://www.iso.org/standard/80773.html)
+- [GOV.UK — What good services look like](https://www.gov.uk/service-manual/design/introduction-designing-government-services)
+
+## 2. Minimize total interaction cost, not raw clicks
+
+**Operational requirement**
+
+Count and reduce unnecessary finding, reading, interpreting, deciding, remembering, entering, navigating, waiting, switching, coordinating, recovering, and verifying. A useful click that narrows choices or preserves context can reduce total effort; a one-click action with hidden consequence can increase it.
+
+Treat screen, field, and click counts as diagnostic components only. Keep task success and critical errors primary.
+
+**Primary references**
+
+- [Nielsen Norman Group — Interaction cost](https://www.nngroup.com/articles/interaction-cost-definition/)
+- [Center Centre/UIE — Testing the Three-Click Rule](https://articles.centercentre.com/three_click_rule/)
+- [Baymard — Checkout fields and perceived effort](https://baymard.com/blog/checkout-flow-average-form-fields)
+
+## 3. Make functions findable in user language
+
+**Operational requirement**
+
+- Name destinations and actions by object, outcome, or task stage.
+- Put task-specific controls at the point of use.
+- Use stable global settings only for genuinely global policy/preferences.
+- Diagnose taxonomy separately from visual prominence.
+- Prefer predictive labels over generic `More`, icon-only, or internal terms.
+
+**Primary references**
+
+- [Nielsen Norman Group — Information scent](https://www.nngroup.com/articles/information-scent/)
+- [Nielsen Norman Group — Navigation and IA testing methods](https://www.nngroup.com/articles/navigation-ia-tests/)
+- [GOV.UK — Naming your service](https://www.gov.uk/service-manual/design/naming-your-service)
+- [Apple Human Interface Guidelines — Settings](https://developer.apple.com/design/human-interface-guidelines/settings)
+
+## 4. Externalize memory and preserve state
+
+**Operational requirement**
+
+- Keep needed labels, requirements, prior choices, owner, status, and consequences visible or immediately retrievable.
+- Retain valid information through errors and navigation.
+- Reuse or make selectable information already supplied in the same process unless an exception applies.
+- Preserve object identity and return context across surfaces.
+
+**Primary references**
+
+- [Nielsen Norman Group — Recognition rather than recall](https://www.nngroup.com/articles/recognition-and-recall/)
+- [WCAG 2.2 Understanding SC 3.3.7 — Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html)
+
+## 5. Ask only necessary questions and handle defaults carefully
+
+**Operational requirement**
+
+- Every field must support a current decision, operation, or binding requirement.
+- Reuse known data and reveal conditional questions only when relevant.
+- Explain unusual requests at the field.
+- Use defaults for safe product configuration or stable low-risk preference.
+- Do not preselect factual claims, eligibility, declarations, or consent that require deliberate user assertion.
+- Provide a manual fallback for lookup, autocomplete, or derivation failure.
+
+**Primary references**
+
+- [GOV.UK — Form structure](https://www.gov.uk/service-manual/design/form-structure)
+- [GOV.UK Design System — Radios](https://design-system.service.gov.uk/components/radios/)
+- [GOV.UK Design System — Selects](https://design-system.service.gov.uk/components/select/)
+- [Baymard — Explain why a required phone number is needed](https://baymard.com/blog/explain-phone-number-field)
+- [Baymard — Postal-code auto-detection with fallback](https://baymard.com/blog/zip-code-auto-detection)
+- [WCAG 2.2 Understanding SC 3.3.7 — Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html)
+
+## 6. Design public/infrequent and expert/repetitive work differently
+
+**Operational requirement**
+
+- In unfamiliar flows, bias toward focus, task order, clear requirements, local errors, and review where consequential.
+- In expert operations, bias toward comparison, stable density, saved views, batch work, shortcuts, and interruption recovery.
+- Test the segments separately when their frequency, data volume, or information needs differ.
+- Keep accessibility and equivalent outcomes constant across both.
+
+**Primary references**
+
+- [GOV.UK — Form structure and one thing per page](https://www.gov.uk/service-manual/design/form-structure)
+- [GOV.UK — Designing services for government users](https://www.gov.uk/service-manual/design/services-for-government-users)
+
+## 7. Prevent expensive errors and make recovery local
+
+**Operational requirement**
+
+- Prioritize prevention by consequence.
+- Use constraints, clear requirements, duplicate protection, review, and idempotency as appropriate.
+- Preserve valid data after an error.
+- Identify the affected field/item in text, explain the correction, and keep the user in context.
+- For consequential submissions, provide reversal, checking, or review/confirmation as required.
+- Prefer undo over ritual confirmation for low-risk reversible actions.
+
+**Primary references**
+
+- [WCAG 2.2 — Input Assistance](https://www.w3.org/TR/WCAG22/#input-assistance)
+- [GOV.UK Design System — Validation](https://design-system.service.gov.uk/patterns/validation/)
+- [GOV.UK Design System — Error message](https://design-system.service.gov.uk/components/error-message/)
+- [GOV.UK Design System — Error summary](https://design-system.service.gov.uk/components/error-summary/)
+- [GOV.UK Design System — Check answers](https://design-system.service.gov.uk/patterns/check-answers/)
+- [GOV.UK Design System — Buttons and warning/destructive actions](https://design-system.service.gov.uk/components/button/)
+
+## 8. Make waits and state transitions legible
+
+**Operational requirement**
+
+- Acknowledge actions immediately at the interface level.
+- Distinguish attempted, accepted/queued, running, succeeded, partially succeeded, failed, cancelled, and stale states when applicable.
+- Show durable completion, not optimistic or client-only state, for consequential effects.
+- Provide meaningful progress or milestones for long work and safe cancellation when truthful.
+- Make status available programmatically without unnecessary focus movement.
+- Measure field and operation latency as distributions, not only averages.
+
+**Primary references**
+
+- [Nielsen Norman Group — Visibility of system status](https://www.nngroup.com/articles/visibility-system-status/)
+- [Nielsen Norman Group — Response-time limits](https://www.nngroup.com/articles/response-times-3-important-limits/)
+- [WCAG 2.2 Understanding SC 4.1.3 — Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
+- [Google — Web Vitals](https://web.dev/articles/vitals)
+- [Google — Interaction to Next Paint](https://web.dev/articles/inp)
+- [Google — RAIL performance model](https://web.dev/articles/rail)
+- [Apple Human Interface Guidelines — Progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators)
+
+For web field performance, the current widely used “good” thresholds at the 75th percentile are LCP at or below 2.5 seconds, INP at or below 200 milliseconds, and CLS at or below 0.1. Treat these as quality guardrails, not proof of task success.
+
+## 9. Accessibility is a completion requirement
+
+**Operational requirement**
+
+- Design and validate keyboard, focus, semantics, status, error support, reflow/zoom, touch targets, reduced motion, and equivalent alternatives.
+- Do not require dragging, hover, or precise gestures when an equivalent route is feasible.
+- Do not hide or automate away the accessible route.
+- Use automated tools as support; validate critical task completion with representative input and assistive technology.
+- Apply platform and organizational requirements in addition to WCAG where relevant.
+
+**Primary references**
+
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- [W3C — Guidance on applying WCAG 2.2 to mobile applications](https://www.w3.org/TR/wcag2mobile-22/)
+- [W3C — Guidance on applying WCAG 2.2 to non-web software](https://www.w3.org/TR/wcag2ict-22/)
+- [ISO 9241-171:2025 — Software accessibility](https://www.iso.org/standard/86308.html)
+- [ISO 9241-161:2025 — Visual user-interface elements](https://www.iso.org/standard/85790.html)
+
+## 10. Visual refinement must strengthen hierarchy
+
+**Operational requirement**
+
+- Use typography, spacing, grouping, alignment, contrast, and placement to express importance.
+- Reuse platform and design-system conventions.
+- Remove ornament and duplicate explanation before reducing labels, contrast, or affordance.
+- Tune density to task frequency and comparison needs.
+- Measure perceived ease/craft separately from correct task performance.
+
+**Primary references**
+
+- [Nielsen Norman Group — Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/)
+- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)
+- [ISO 9241-161:2025 — Visual user-interface elements](https://www.iso.org/standard/85790.html)
+- [Tractinsky, Katz, and Ikar — What is beautiful is usable](https://doi.org/10.1016/S0953-5438(00)00031-X)
+
+Aesthetic appeal can influence perceived usability. It does not replace task evidence.
+
+## 11. Human-centred work is iterative and evidence-driven
+
+**Operational requirement**
+
+- Involve representative users or operators throughout design when feasible.
+- Use synthetic scenarios to expose hypotheses, not replace research.
+- Evaluate designs against explicit tasks and context.
+- Iterate based on evidence and preserve a decision history.
+- Assess organizational HCD capability when streamlining is systemic, not a one-off screen change.
+
+**Primary references**
+
+- [ISO 9241-210:2019 — Human-centred design](https://www.iso.org/standard/77520.html)
+- [ISO 9241-222:2026 — Self-assessment of human-centred design approach](https://www.iso.org/standard/88373.html)
+- [GOV.UK — How user research improves service design](https://www.gov.uk/service-manual/user-research/how-user-research-improves-service-design)
+
+# Context-dependent choices
+
+Treat these as hypotheses. Select using the task episode, risk, frequency, evidence, and validation method.
+
+| Choice | Prefer option A when | Prefer option B when | Required test/guardrail |
+|---|---|---|---|
+| One page vs sequential flow | Users compare independent fields, experts scan/edit repeatedly, content is manageable | Questions depend on prior answers, task is unfamiliar, focus/recovery benefits | Same-task success, time, error, mobile/AT completion |
+| Inline edit vs dedicated page | Change is local, small, frequent, reversible, and context matters | Work is complex, linkable, resumable, or high consequence | Validation, focus, interruption, deep link, review |
+| Modal vs page/drawer | Decision is bounded and must be resolved before continuing | User needs comparison, long work, navigation, or resumption | Focus/keyboard, responsive behavior, no nested layers |
+| Table vs cards | Comparison across consistent attributes and bulk work dominate | Items are heterogeneous and comparison is secondary | Scan task, responsive/AT behavior, density |
+| Progressive disclosure vs always visible | Advanced/infrequent controls compete with common work | Hidden item is frequent, safety-critical, or needed for comparison | Discovery rate, first action, orientation, no critical hidden control |
+| Default vs explicit choice | Default is safe, visible, easy to change, and based on reliable context | Answer is a factual claim, consent, eligibility, or high-consequence scope | Wrong-default rate and correction cost |
+| Autosave vs explicit save | Work is long/interruption-prone and conflicts/privacy are handled | Commit has consequential side effects or users need an explicit boundary | Save-state visibility, conflict, recovery, accidental commit |
+| Optimistic vs confirmed update | Failure is rare, low-risk, reversible, and reconcilable | Money, deletion, permission, publication, or uncertain server result | Duplicate/rollback/stale tests; no false completion |
+| Confirmation vs undo | Action is hard to reverse or requires deliberate consequence review | Action is low-risk and immediately reversible | Critical-error and habituation risk |
+| Bulk vs one-at-a-time | Operation is truly repetitive and per-item policy is consistent | Cases need judgment or mixed eligibility is hard to explain | Scope/preview, partial failure, idempotency, audit |
+| Sparse vs dense | Task is unfamiliar and explanation/focus dominate | Expert comparison, scanning, and throughput dominate | Segment-specific success, scan time, accessibility |
+| Personalization vs stable defaults | Repeated use and reliable preference evidence justify variation | Predictability, shared work, support, or safety requires consistency | Discoverability, reset, shared-state effects, subgroup quality |
+| AI suggestion vs execution | Ambiguity, consequence, or quality requires human judgment | Task is bounded, authorized, observable, recoverable, and quality is adequate | Correct-use/rejection, correction cost, partial failure, stop/override |
+
+## Progressive-disclosure adjudication
+
+Use analytics to identify candidate frequency splits, but use observation or task testing to determine whether users understand and find the reveal. Avoid deep disclosure chains; hidden safety, permission, recovery, and status controls require especially strong justification.
+
+Reference: [Nielsen Norman Group — Progressive disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+## Direct-manipulation adjudication
+
+Prefer visible, incremental, reversible action with immediate feedback when the object and consequence are clear. Preserve non-drag and keyboard alternatives. Keep explicit review for ambiguous or consequential changes.
+
+Reference: [Shneiderman — Direct Manipulation: A Step Beyond Programming Languages](https://www.cs.umd.edu/users/ben/papers/Shneiderman1983Direct.pdf)
+
+# Measurement and method map
+
+## End-to-end benchmarking
+
+Use believable, representative, stable tasks with an objectively correct outcome. Record success, critical errors, time, abandonment, false confidence, ease, and confidence. Keep population, task wording, data, and environment comparable.
+
+- [GOV.UK — Usability benchmarking](https://www.gov.uk/service-manual/measuring-success/usability-benchmarking-a-website-or-whole-service)
+- [GOV.UK — Measuring completion rate](https://www.gov.uk/service-manual/measuring-success/measuring-completion-rate)
+
+## Cognitive walkthrough
+
+Use to predict whether a specified actor can form the right goal, notice the action, connect it to the outcome, and understand feedback. Treat results as heuristic/observed evidence depending on whether a runnable product is inspected—not as population research.
+
+- [AHRQ — Cognitive walkthrough](https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit/all-workflow-tools/cognitive-walkthrough)
+
+## Information-architecture testing
+
+- **Card sorting** explores grouping and language.
+- **Tree testing** isolates hierarchy/labels without visual design.
+- **First-click/click testing** examines visible prominence and interpretation.
+- **Usability testing** evaluates the combined end-to-end experience.
+
+- [Nielsen Norman Group — Navigation and IA tests](https://www.nngroup.com/articles/navigation-ia-tests/)
+
+## Workload
+
+For complex workflows, pair task outcomes with a validated workload instrument when the decision needs mental, physical, temporal, performance, effort, and frustration evidence.
+
+- [NASA — NASA Task Load Index](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)
+
+Do not label a local weighted click/decision score as validated cognitive load.
+
+## Failure analysis
+
+Use a lightweight failure-mode analysis for high-consequence or hard-to-detect errors. Keep severity, likelihood evidence, detectability, controls, and recovery visible; do not let a single composite score override critical risk.
+
+- [Institute for Healthcare Improvement — Failure Modes and Effects Analysis tool](https://www.ihi.org/library/tools/failure-modes-and-effects-analysis-fmea-tool)
+
+## Controlled experiments
+
+Define the primary metric, guardrails, eligibility, assignment, instrumentation, segments, stop conditions, and interpretation before exposure. Validate metric semantics and avoid changing the task denominator during comparison.
+
+- [Microsoft Experimentation Platform — Safe velocity](https://exp-platform.com/Documents/2019%20TongXiaSumitBhardwajPavelDmitrievAleksanderFabijan_Safe-Velocity-ICSE-SEI.pdf)
+- [Microsoft Experimentation Platform — Metric interpretation pitfalls](https://exp-platform.com/Documents/2017-08%20KDDMetricInterpretationPitfalls.pdf)
+
+# Accessibility requirements map
+
+Use the applicable WCAG conformance target and organizational/platform rules. The following are especially relevant to streamlining.
+
+| Streamlining concern | Requirement/reference | Operational implication |
+|---|---|---|
+| Preserve/reuse data | [SC 3.3.7 Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html) | Previously supplied information in the same process should be auto-populated or selectable unless an exception applies |
+| Programmatic status | [SC 4.1.3 Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) | Announce result/progress/errors without moving focus unnecessarily |
+| Target size | [SC 2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum) | Provide at least the required target area/spacing or meet a defined exception; do not shrink critical controls for visual minimalism |
+| Drag alternatives | [SC 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html) | Provide a single-pointer alternative unless dragging is essential |
+| Focus visibility | [WCAG 2.2 Focus Appearance/Not Obscured criteria](https://www.w3.org/TR/WCAG22/#keyboard-accessible) | Sticky layers, dialogs, and route changes must not hide or lose focus |
+| Errors and high-consequence input | [WCAG 2.2 Input Assistance](https://www.w3.org/TR/WCAG22/#input-assistance) | Identify errors in text and provide checking/reversal/confirmation where criteria apply |
+| Authentication | [SC 3.3.8 Accessible Authentication (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html) | Avoid unnecessary cognitive-function tests and preserve password-manager/paste-compatible routes where applicable |
+| Mobile application application | [WCAG2Mobile 2.2](https://www.w3.org/TR/wcag2mobile-22/) | Apply WCAG principles to native and hybrid mobile contexts |
+| Non-web software application | [WCAG2ICT 2.2](https://www.w3.org/TR/wcag2ict-22/) | Apply relevant success criteria to non-web software/documents |
+
+The WCAG minimum pointer target in SC 2.5.8 is 24 by 24 CSS pixels subject to defined exceptions; the enhanced target in SC 2.5.5 is 44 by 44 CSS pixels. Product/platform standards may require larger targets.
+
+# AI and automation requirements map
+
+## Human-AI interaction lifecycle
+
+Apply guidance across first use, normal use, failure, correction, and changing system behavior.
+
+| Lifecycle moment | Required behavior |
+|---|---|
+| Before use | Set accurate expectations for capability, limits, data, tools, authority, and likely failure |
+| During recommendation | Make basis/provenance and uncertainty useful at the decision point; preserve alternatives |
+| Before action | Show goal, scope, affected objects, side effects, assumptions, and approval boundary |
+| During action | Show meaningful progress/state; allow stop or override where safe |
+| After action | Show durable results, partial failure, exceptions, history, and recovery |
+| After correction | Let users edit/reject/override; do not imply learning or memory unless it actually occurs |
+| Over time | Monitor subgroup quality, drift, calibration, exception burden, and automation bias |
+
+**Primary references**
+
+- [Microsoft — Guidelines for Human-AI Interaction](https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/)
+- [Microsoft — Designing loops, not paths](https://microsoft.design/articles/designing-loops-not-paths/)
+- [Microsoft Research — Human-agent interaction challenges](https://www.microsoft.com/en-us/research/publication/human-agent-interaction-challenges/)
+- [Google PAIR Guidebook](https://pair.withgoogle.com/guidebook/)
+- [Google PAIR — Explainability and trust](https://pair.withgoogle.com/chapter/explainability-trust/)
+- [Google PAIR — Feedback and control](https://pair.withgoogle.com/chapter/feedback-controls/)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [NIST AI RMF Playbook](https://airc.nist.gov/airmf-resources/playbook/)
+
+## AI evidence rule
+
+Do not use model benchmark capability alone to justify workflow automation. Evaluate:
+
+- task-specific quality and critical-error taxonomy;
+- representative data and edge cases;
+- correct acceptance and correct rejection;
+- human verification/correction effort;
+- provenance and uncertainty comprehension;
+- tool/permission failure and partial action;
+- stop, override, rollback, and audit;
+- subgroup and complexity variation;
+- downstream rework/harm;
+- operational monitoring and exception load.
+
+## Authority rule
+
+Separate these states in UI and implementation:
 
 ```text
-Actor and context: role, proficiency, frequency, device/input, environment, constraints
-Trigger: what happened immediately before opening the product
-Goal and success state: the observable outcome, including confirmation
-Starting state/data: what is known, selected, dirty, stale, or missing
-Current episode: exact screens/actions/decisions/waits from intent to outcome
-Friction ledger: for each beat, locate/interpret/decide/type/remember/wait/recover
-Failure branch: likely slip or system failure, consequence, and recovery path
-Streamlined episode: proposed path with preserved safeguards
-Predicted delta: counts and timings, explicitly labeled hypothesis
-Unknowns: facts that require analytics, user research, or runtime proof
+suggested -> drafted -> reviewed -> approved -> executing -> durably completed
 ```
 
-At each beat, perform a cognitive walkthrough: will the actor pursue the right goal, notice the correct action, connect it to the outcome, and understand the resulting feedback? This discipline is documented in AHRQ's original workflow-assessment toolkit ([cognitive walkthrough](https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit/all-workflow-tools/cognitive-walkthrough)).
+A user request to “streamline” does not authorize the system to cross permission, consent, publication, financial, deletion, or external side-effect boundaries automatically.
 
-Tag every story detail as **verified**, **inferred**, or **unknown**. Do not invent preferences, frequency, or business rules. The stories should end as realistic benchmark tasks with a clear correct result. GOV.UK recommends believable, representative, stable tasks and measuring success, time, abandonment/false confidence, ease, and confidence ([usability benchmarking](https://www.gov.uk/service-manual/measuring-success/usability-benchmarking-a-website-or-whole-service)).
+# Reliability and release requirements map
 
-## Before/after measurement contract
+Streamlining can increase risk when a shorter path triggers external effects faster. Apply resilient distributed-system practices where the episode crosses services, queues, retries, or side effects.
 
-Capture a baseline before recommending changes. Report by workflow and user segment; do not hide a severe regression inside a single composite “UX score.”
+## Required engineering behaviors
 
-| Outcome | Measure | Interpretation |
+| Concern | Operational requirement | Reference |
 |---|---|---|
-| Correct completion | Unassisted correct completions / attempts | Primary effectiveness measure; define the end state before testing |
-| Safe completion | Correct completions with no critical error / attempts | Required for consequential admin, money, permission, or destructive work |
-| Efficiency | Median and P75/P90 time on task among successful attempts | Compare equivalent users, tasks, devices, and data volumes |
-| Effort profile | Required decisions, fields, keystrokes, pointer actions, waits, context switches, backtracks, recall dependencies | A vector, not one magic number; weight observed pain and accessibility barriers |
-| Findability | Direct tree-test success, indirect success, first choice, time to target | Separates IA/label issues from visual prominence issues |
-| Errors and recovery | Error rate, correction attempts, recovery success, recovery time, lost-work incidents | Classify by severity and user/system cause |
-| Flow health | Start-to-finish completion, abandonment by step, help/contact rate, repeated submission | Diagnose where a live journey breaks; GOV.UK defines completion against explicit start/end points ([completion rate](https://www.gov.uk/service-manual/measuring-success/measuring-completion-rate)) |
-| Confidence/satisfaction | Post-task ease, confidence, expected-versus-actual time; consistent rating scale | Pair self-report with observed success; false confidence is a serious finding |
-| Workload | Mental, physical, and temporal demand; effort, frustration, perceived performance | For complex workflows, compare with NASA-TLX rather than treating click count as cognitive load ([NASA-TLX](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)) |
-| Accessibility | Critical-task completion by keyboard and representative AT; WCAG 2.2 checks | Automated findings supplement, never replace, task testing |
-| Responsiveness | P75 field LCP/INP/CLS for web; operation acknowledgment and completion latency | Segment mobile/desktop and key workflows; do not report only averages |
-| Frequency-weighted benefit | Workflow frequency × median successful time saved | Estimate system value without letting rare cosmetic savings outrank common blockers |
+| Retry safety | Classify transient/permanent/unknown-result failures; use bounded retry, backoff/jitter where appropriate; reconcile before repeating unknown outcomes | [AWS Builders' Library — Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) |
+| Idempotency | Give repeated requests a stable identity and ensure they do not duplicate side effects | [Google Cloud — Idempotency](https://cloud.google.com/discover/idempotency) |
+| Staged rollout | Start with limited exposure, monitor primary and guardrail outcomes, halt on regression | [Google SRE Workbook — Canarying releases](https://sre.google/workbook/canarying-releases/) |
+| Rollback-first design | Make rollback/compensation and operational ownership explicit before broad release | [Google SRE Book — Service best practices](https://sre.google/sre-book/service-best-practices/) |
+| Feature-flag portability | Use a governed, vendor-neutral abstraction when appropriate; own lifecycle and cleanup | [OpenFeature](https://openfeature.dev/) |
+| Authentication UX and security | Support usable, phishing-resistant, password-manager-compatible authentication according to current policy; do not weaken security to remove steps | [NIST SP 800-63B-4](https://pages.nist.gov/800-63-4/sp800-63b.html) and [Authenticator requirements](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/) |
 
-Each recommendation should include:
+## Release proof rule
 
-- baseline and proposed flow diagrams or beat lists;
-- friction removed, friction moved, and safeguards retained;
-- predicted metric direction and numeric target/range where evidence permits;
-- evidence grade: runtime/repository fact, analytics, user research, external heuristic, or synthetic hypothesis;
-- reach, severity, confidence, implementation cost, and regression risks;
-- validation method and stop/revert condition.
+A local pass proves only the local check. Distinguish:
 
-Good targets are task-specific: for example, “raise unassisted completion from 68% to at least 85% without increasing critical errors,” or “reduce median successful admin-review time by 25% while preserving keyboard completion.” “Reduce clicks by 40%” is useful only as a secondary mechanical observation and is never sufficient acceptance evidence.
+- code/static correctness;
+- test-environment workflow behavior;
+- staged production technical health;
+- real-world task outcome;
+- human usability improvement.
 
-## Recommended shape of the skill output
+Each requires different evidence.
 
-1. **Scope and evidence boundary** — product surface, inspected evidence, unknowns, user segments.
-2. **Workflow map** — highest-value jobs and their start/end states.
-3. **Friction ledger** — severity-ranked locate/understand/decide/type/wait/recover costs.
-4. **Synthetic stories** — current and streamlined episodes, including expert, interrupted, accessible, degraded, and failure paths.
-5. **Recommendations** — remove, combine, relocate, rename, default, prefill, reveal, accelerate, or automate; retain safeguards explicitly.
-6. **Before/after scorecard** — baseline, hypothesis, target, validation, and no-regression checks.
-7. **Implementation sequence** — reversible, high-confidence changes first; riskier structural changes behind prototypes or experiments.
+# Source index
 
-The skill should refuse to call a redesign “intuitive,” “simpler,” or “better” solely from heuristic inspection. It can call it a stronger hypothesis, then say what evidence would confirm or falsify it.
+Use primary and authoritative sources first. Mature design systems and specialist research are pattern evidence, not binding standards unless adopted by the product.
 
+## International standards
+
+- [ISO 9241-11:2018 — Usability: Definitions and concepts](https://www.iso.org/standard/63500.html)
+- [ISO 9241-210:2019 — Human-centred design for interactive systems](https://www.iso.org/standard/77520.html)
+- [ISO 9241-110:2020 — Interaction principles](https://www.iso.org/standard/75258.html)
+- [ISO 9241-115:2024 — Conceptual, interaction, interface, and navigation design](https://www.iso.org/standard/80773.html)
+- [ISO 9241-161:2025 — Visual user-interface elements](https://www.iso.org/standard/85790.html)
+- [ISO 9241-171:2025 — Software accessibility](https://www.iso.org/standard/86308.html)
+- [ISO 9241-222:2026 — Self-assessment of human-centred design approach](https://www.iso.org/standard/88373.html)
+
+## W3C accessibility
+
+- [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- [WCAG2Mobile 2.2](https://www.w3.org/TR/wcag2mobile-22/)
+- [WCAG2ICT 2.2](https://www.w3.org/TR/wcag2ict-22/)
+- [Understanding Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html)
+- [Understanding Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
+- [Understanding Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum)
+- [Understanding Accessible Authentication (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html)
+
+## Public-service design and measurement
+
+- [GOV.UK — What good services look like](https://www.gov.uk/service-manual/design/introduction-designing-government-services)
+- [GOV.UK — How user research improves service design](https://www.gov.uk/service-manual/user-research/how-user-research-improves-service-design)
+- [GOV.UK — Form structure](https://www.gov.uk/service-manual/design/form-structure)
+- [GOV.UK — Services for government users](https://www.gov.uk/service-manual/design/services-for-government-users)
+- [GOV.UK — Usability benchmarking](https://www.gov.uk/service-manual/measuring-success/usability-benchmarking-a-website-or-whole-service)
+- [GOV.UK — Measuring completion rate](https://www.gov.uk/service-manual/measuring-success/measuring-completion-rate)
+- [GOV.UK Design System](https://design-system.service.gov.uk/)
+
+## Human factors and UX research
+
+- [Nielsen Norman Group — Interaction cost](https://www.nngroup.com/articles/interaction-cost-definition/)
+- [Nielsen Norman Group — Information scent](https://www.nngroup.com/articles/information-scent/)
+- [Nielsen Norman Group — Recognition and recall](https://www.nngroup.com/articles/recognition-and-recall/)
+- [Nielsen Norman Group — Progressive disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+- [Nielsen Norman Group — System status](https://www.nngroup.com/articles/visibility-system-status/)
+- [Nielsen Norman Group — Response times](https://www.nngroup.com/articles/response-times-3-important-limits/)
+- [Center Centre/UIE — Three-click rule study](https://articles.centercentre.com/three_click_rule/)
+- [NASA — Task Load Index](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)
+- [AHRQ — Cognitive walkthrough](https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit/all-workflow-tools/cognitive-walkthrough)
+- [Shneiderman — Direct manipulation](https://www.cs.umd.edu/users/ben/papers/Shneiderman1983Direct.pdf)
+
+## Forms and commerce research
+
+- [Baymard — Checkout fields and perceived effort](https://baymard.com/blog/checkout-flow-average-form-fields)
+- [Baymard — Explain required phone fields](https://baymard.com/blog/explain-phone-number-field)
+- [Baymard — Postal-code auto-detection and fallback](https://baymard.com/blog/zip-code-auto-detection)
+
+## Platform and design-system guidance
+
+- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)
+- [Apple — Settings](https://developer.apple.com/design/human-interface-guidelines/settings)
+- [Apple — Progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators)
+- [Apple — Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons)
+- [Atlassian Design System — Modal dialog](https://atlassian.design/components/modal-dialog)
+- [Atlassian Design System — Dynamic table](https://atlassian.design/components/dynamic-table)
+- [Atlassian Design System — Empty state](https://atlassian.design/components/empty-state)
+- [Atlassian Design System — Inline edit](https://atlassian.design/components/inline-edit/inline-editable-textfield)
+- [Google — Web Vitals](https://web.dev/articles/vitals)
+- [Google — RAIL](https://web.dev/articles/rail)
+
+## AI and risk
+
+- [Microsoft — Guidelines for Human-AI Interaction](https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/)
+- [Microsoft — Designing loops, not paths](https://microsoft.design/articles/designing-loops-not-paths/)
+- [Google PAIR Guidebook](https://pair.withgoogle.com/guidebook/)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [NIST AI RMF Playbook](https://airc.nist.gov/airmf-resources/playbook/)
+
+## Engineering, experimentation, and release
+
+- [Google SRE — Canarying releases](https://sre.google/workbook/canarying-releases/)
+- [Google SRE — Service best practices](https://sre.google/sre-book/service-best-practices/)
+- [AWS Builders' Library — Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
+- [Google Cloud — Idempotency](https://cloud.google.com/discover/idempotency)
+- [OpenFeature](https://openfeature.dev/)
+- [Microsoft Experimentation Platform — Safe velocity](https://exp-platform.com/Documents/2019%20TongXiaSumitBhardwajPavelDmitrievAleksanderFabijan_Safe-Velocity-ICSE-SEI.pdf)
+- [Microsoft Experimentation Platform — Metric interpretation pitfalls](https://exp-platform.com/Documents/2017-08%20KDDMetricInterpretationPitfalls.pdf)
+- [NIST SP 800-63B-4](https://pages.nist.gov/800-63-4/sp800-63b.html)
+
+# Maintenance rules
+
+Review this reference when:
+
+- WCAG, ISO 9241, NIST authentication/AI, platform HIG, or Core Web Vitals guidance changes;
+- the skill adds a new domain such as voice, spatial, automotive, clinical, or safety-critical control;
+- a cited URL becomes unavailable or materially changes scope;
+- a pattern is promoted from hypothesis to standing guardrail;
+- a standing guardrail proves context-dependent in repeated valid cases.
+
+When updating:
+
+1. prefer official standards, primary research, and first-party guidance;
+2. record publication/version date for standards;
+3. distinguish normative requirement from advisory guidance;
+4. remove superseded editions when a current edition replaces them, while preserving migration notes when needed;
+5. do not copy long copyrighted passages—summarize the operational implication and link the source;
+6. keep product-specific findings out of this file;
+7. keep the actionable rule in the skill or pattern catalog and use this file as its evidence basis.
