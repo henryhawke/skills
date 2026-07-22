@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shopify App Ralph"
+  short_description: "Iterate Shopify apps through a dev-store preview"
+  default_prompt: "Use $shopify-app-ralph to iterate on this Shopify app goal through the local dev-store preview until its focused gates pass."

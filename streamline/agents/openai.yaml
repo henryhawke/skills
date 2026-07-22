@@ -1,0 +1,4 @@
+interface:
+  display_name: "Streamline"
+  short_description: "Refine workflows into clear, measurable paths"
+  default_prompt: "Use $streamline to audit and simplify this product workflow while preserving necessary controls."
