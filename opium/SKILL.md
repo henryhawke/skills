@@ -77,7 +77,7 @@ Reject and revise any draft that degrades Opium into a generic bug/code review. 
    - device, canary, or operational proof.
 4. State the audit boundary and exclusions. Include vendored repositories, gitlinks, generated code, infrastructure, migrations, mobile platforms, and remote systems only when the manifest or runtime architecture makes them part of the finish line.
 5. Start a task plan. Keep synthesis owned by the root agent.
-6. Create a temporary audit workspace outside the repository. Resolve this skill's folder and run `scripts/audit_ledger.py init --repo <repo> --out <temp>/ledger.json`. Keep agent shards and intermediate ledgers there; never put secrets, raw credentials, or prohibited project documentation in them.
+6. Create a temporary audit workspace outside the repository. Read [ledger-engine.md](references/ledger-engine.md), resolve this skill's folder, and run `scripts/audit_ledger.py init --repo <repo> --out <temp>/ledger.json`. Keep agent shards and intermediate ledgers there; never put secrets, raw credentials, or prohibited project documentation in them.
 7. Preflight available disk, temporary-directory writability, required binaries, credentials/targets, and expected validation cost before launching expensive checks. The ledger snapshot records free disk. Less than 1 GiB is a warning floor, not a universal requirement; use each project profile's actual needs and classify infrastructure exhaustion as blocked evidence rather than a repository test failure.
 8. Choose `FULL` or `DEGRADED` audit mode. Use `FULL` by default. Use `DEGRADED` only for a hard time/token/tool/concurrency cap or inaccessible canonical universe; state the cap, preserve provisional denominators, and never emit a full-completion claim.
 
@@ -204,7 +204,7 @@ Assign independent verification for every critical/high remaining item, contradi
 
 The root agent must reconcile disagreements against current source and raw evidence. Do not average conflicting agent opinions or paste agent summaries into the final report unverified.
 
-Require each agent to return the machine-checkable shard shape documented in [adaptive-orchestration.md](references/adaptive-orchestration.md), plus a short human synopsis. Merge shards with `scripts/audit_ledger.py merge-shard`; never let a shard directly overwrite the root edict disposition. The merge stores observations, while the root adjudicates them.
+Require each agent to return the machine-checkable shard shape documented in [adaptive-orchestration.md](references/adaptive-orchestration.md), plus a short human synopsis. Preflight each shard with `scripts/audit_ledger.py validate-shard --ledger <temp>/ledger.json --shard <temp>/shard.json --json`, then merge it with `scripts/audit_ledger.py merge-shard`. Never let a shard directly overwrite the root edict disposition. The transactional merge stores observations, while the root adjudicates them.
 
 ## Phase 4: Trace every edict through reality
 
