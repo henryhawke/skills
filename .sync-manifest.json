@@ -2,109 +2,64 @@
   "version": 1,
   "skills": {
     "babysit": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "canvas": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "create-hook": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "create-rule": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "create-skill": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "create-subagent": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "sdk": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "loop": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "migrate-to-skills": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "shell": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "split-to-prs": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "statusline": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "update-cli-config": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "update-cursor-settings": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "automate": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "review": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "review-bugbot": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "review-security": {
-      "lastSyncedAt": 1784734019593
+      "lastSyncedAt": 1784831831599
     },
     "onboard": {
-      "lastSyncedAt": 1784734019593
-    },
-    ".system": {
-      "lastSyncedAt": 1784554181006
-    },
-    "agentmemory-agents": {
-      "lastSyncedAt": 1784563182803
-    },
-    "agentmemory-architecture": {
-      "lastSyncedAt": 1784563182803
-    },
-    "agentmemory-config": {
-      "lastSyncedAt": 1784563182803
-    },
-    "agentmemory-hooks": {
-      "lastSyncedAt": 1784563182803
-    },
-    "agentmemory-mcp-tools": {
-      "lastSyncedAt": 1784563182803
-    },
-    "agentmemory-rest-api": {
-      "lastSyncedAt": 1784563182803
-    },
-    "commit-context": {
-      "lastSyncedAt": 1784563182803
-    },
-    "commit-history": {
-      "lastSyncedAt": 1784563182803
-    },
-    "forget": {
-      "lastSyncedAt": 1784563182803
-    },
-    "recall": {
-      "lastSyncedAt": 1784563182803
-    },
-    "recap": {
-      "lastSyncedAt": 1784563182803
-    },
-    "remember": {
-      "lastSyncedAt": 1784563182803
-    },
-    "session-history": {
-      "lastSyncedAt": 1784563182803
-    },
-    "write-agentmemory-skill": {
-      "lastSyncedAt": 1784563182803
+      "lastSyncedAt": 1784831831599
     },
     "shopify-app-ralph": {
-      "lastSyncedAt": 1784564983312
+      "lastSyncedAt": 1784831831599
     },
     "ab-test-analysis": {
       "lastSyncedAt": 1784577771958
@@ -1179,7 +1134,10 @@
     },
     "streamline": {
       "lastSyncedAt": 1784734019593
+    },
+    ".system": {
+      "lastSyncedAt": 1784830031107
     }
   },
-  "lastInventoryAt": 1784730418735
+  "lastInventoryAt": 1784826508772
 }
