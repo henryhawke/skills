@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Optimize"
+  short_description: "Audit and optimize total web quality"
+  default_prompt: "Use $web-optimize to audit this site across performance, Core Web Vitals, accessibility, SEO, and best practices, then prioritize evidence-backed fixes."
